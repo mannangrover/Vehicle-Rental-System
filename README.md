@@ -43,7 +43,7 @@ Booking limits are in `rental-policy.xml`: at most 30 days long, at most 90 days
 - JSP and JSTL for pages, Bootstrap 5 for layout
 - Barlow fonts (SIL Open Font License), stored in `static/fonts` so the app works offline
 - Spring JDBC (`JdbcTemplate`) with plain SQL
-- H2 database saved to a file, with an optional MySQL setup
+- H2 database saved to a file
 - JUnit 5, AssertJ and MockMvc for tests
 - Maven, through the included wrapper
 
@@ -106,7 +106,6 @@ src/main/java/com/vehiclerental/
 src/main/resources/
     application.properties  main settings (H2 saved to a file)
     application-h2.properties   in-memory H2, used by the tests
-    application-mysql.properties    optional MySQL settings
     schema.sql              creates the tables
     rental-policy.xml       booking limits, as an XML bean
     static/css/app.css      styles
@@ -126,15 +125,6 @@ src/test/java/com/vehiclerental/
 4. Open http://localhost:8080.
 
 The app saves its data in an H2 database in the `data` folder. It needs no install or password. To start again with fresh demo data, stop the app and delete the `data` folder.
-
-### Optional: MySQL
-
-The project can also run on MySQL, but this hasn't been tested yet. MySQL must be running on `localhost:3306`. Create `application-local.properties` in the project folder with your login, then choose **Run with MySQL**.
-
-```properties
-spring.datasource.username=your_mysql_user
-spring.datasource.password=your_mysql_password
-```
 
 ## Run it from the terminal
 

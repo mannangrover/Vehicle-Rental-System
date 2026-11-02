@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("h2")
 @TestPropertySource(properties = {
         "app.seed-demo-data=false",
-        "spring.datasource.url=jdbc:h2:mem:page_security_test;MODE=MySQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1"
+        "spring.datasource.url=jdbc:h2:mem:page_security_test;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1"
 })
 class PageSecurityTest {
 

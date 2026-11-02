@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 @ActiveProfiles("h2")
 @TestPropertySource(properties = {
         "app.seed-demo-data=false",
-        "spring.datasource.url=jdbc:h2:mem:double_booking_test;MODE=MySQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1"
+        "spring.datasource.url=jdbc:h2:mem:double_booking_test;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1"
 })
 class DoubleBookingTest extends ServiceTestBase {
 

@@ -26,7 +26,7 @@ public class BookingDao {
      */
     static final String CONFLICT_CONDITION =
             "b.status IN ('CONFIRMED', 'ACTIVE') AND b.start_at < ? "
-            + "AND (b.end_at > ? OR (b.status = 'ACTIVE' AND CAST(? AS DATETIME) <= CAST(? AS DATETIME)))";
+            + "AND (b.end_at > ? OR (b.status = 'ACTIVE' AND CAST(? AS TIMESTAMP) <= CAST(? AS TIMESTAMP)))";
 
     private static final String SELECT_BOOKING =
             "SELECT b.*, v.brand, v.model, v.reg_number, v.type AS vehicle_type, "

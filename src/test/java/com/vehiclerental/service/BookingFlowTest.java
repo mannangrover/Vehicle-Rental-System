@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ActiveProfiles("h2")
 @TestPropertySource(properties = {
         "app.seed-demo-data=false",
-        "spring.datasource.url=jdbc:h2:mem:booking_flow_test;MODE=MySQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1"
+        "spring.datasource.url=jdbc:h2:mem:booking_flow_test;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1"
 })
 class BookingFlowTest extends ServiceTestBase {
 
