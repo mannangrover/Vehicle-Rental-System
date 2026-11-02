@@ -1,0 +1,77 @@
+CREATE TABLE IF NOT EXISTS users (
+    id            BIGINT AUTO_INCREMENT PRIMARY KEY,
+    full_name     VARCHAR(100) NOT NULL,
+    email         VARCHAR(150) NOT NULL UNIQUE,
+    phone         VARCHAR(20)  NOT NULL,
+    license_no    VARCHAR(30)  NOT NULL,
+    password_hash VARCHAR(100) NOT NULL,
+    role          VARCHAR(20)  NOT NULL,
+    created_at    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS vehicles (
+    id            BIGINT AUTO_INCREMENT PRIMARY KEY,
+    type          VARCHAR(10)   NOT NULL,
+    brand         VARCHAR(50)   NOT NULL,
+    model         VARCHAR(50)   NOT NULL,
+    model_year    INT           NOT NULL,
+    reg_number    VARCHAR(20)   NOT NULL UNIQUE,
+    fuel_type     VARCHAR(20)   NOT NULL,
+    transmission  VARCHAR(20)   NOT NULL,
+    seats         INT           NOT NULL,
+    daily_rate    DECIMAL(10,2) NOT NULL,
+    hourly_rate   DECIMAL(10,2) NOT NULL,
+    status        VARCHAR(20)   NOT NULL,
+    created_at    TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT chk_vehicle_rate CHECK (daily_rate > 0 AND hourly_rate > 0)
+);
+
+CREATE TABLE IF NOT EXISTS bookings (
+    id                 BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id            BIGINT        NOT NULL,
+    vehicle_id         BIGINT        NOT NULL,
+    start_at           DATETIME      NOT NULL,
+    end_at             DATETIME      NOT NULL,
+    daily_rate         DECIMAL(10,2) NOT NULL,
+    hourly_rate        DECIMAL(10,2) NOT NULL,
+    rental_amount      DECIMAL(10,2) NOT NULL,
+    deposit_amount     DECIMAL(10,2) NOT NULL,
+    late_fee           DECIMAL(10,2) NOT NULL DEFAULT 0,
+    damage_fee         DECIMAL(10,2) NOT NULL DEFAULT 0,
+    status             VARCHAR(20)   NOT NULL,
+    overdue            BOOLEAN       NOT NULL DEFAULT FALSE,
+    picked_up_at       DATETIME      NULL,
+    returned_at        DATETIME      NULL,
+    created_at         TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_booking_user FOREIGN KEY (user_id) REFERENCES users (id),
+    CONSTRAINT fk_booking_vehicle FOREIGN KEY (vehicle_id) REFERENCES vehicles (id),
+    CONSTRAINT chk_booking_dates CHECK (end_at > start_at)
+);
+
+CREATE TABLE IF NOT EXISTS invoices (
+    id             BIGINT AUTO_INCREMENT PRIMARY KEY,
+    booking_id     BIGINT      NOT NULL UNIQUE,
+    invoice_number VARCHAR(30) NOT NULL UNIQUE,
+    issued_at      TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_invoice_booking FOREIGN KEY (booking_id) REFERENCES bookings (id)
+);
+
+CREATE TABLE IF NOT EXISTS payments (
+    id         BIGINT AUTO_INCREMENT PRIMARY KEY,
+    booking_id BIGINT        NOT NULL,
+    amount     DECIMAL(10,2) NOT NULL,
+    method     VARCHAR(10)   NOT NULL,
+    type       VARCHAR(10)   NOT NULL,
+    reference  VARCHAR(40)   NOT NULL,
+    created_at TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_payment_booking FOREIGN KEY (booking_id) REFERENCES bookings (id),
+    CONSTRAINT chk_payment_amount CHECK (amount > 0)
+);
+
+CREATE TABLE IF NOT EXISTS audit_logs (
+    id         BIGINT AUTO_INCREMENT PRIMARY KEY,
+    action     VARCHAR(60)  NOT NULL,
+    details    VARCHAR(255) NOT NULL,
+    actor      VARCHAR(150) NOT NULL,
+    created_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

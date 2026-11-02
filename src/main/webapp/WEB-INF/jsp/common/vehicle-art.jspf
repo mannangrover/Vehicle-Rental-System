@@ -1,0 +1,46 @@
+<%-- Side view of a vehicle. Set "artType" to a VehicleType before including this. Decorative only. --%>
+<c:choose>
+    <c:when test="${artType == 'BIKE'}">
+        <svg class="vehicle-art" viewBox="0 0 160 66" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="36" cy="49" r="13" stroke-width="5"/>
+                <circle cx="124" cy="49" r="13" stroke-width="5"/>
+                <path d="M36 49 L60 28 H92 L124 49" stroke-width="4"/>
+                <path d="M124 49 L106 13 M97 11 H113" stroke-width="4.5"/>
+                <path d="M36 49 H70 L92 28" stroke-width="4"/>
+            </g>
+            <path fill="currentColor" d="M62 33 H88 V47 C88 49 86 51 84 51 H66 C64 51 62 49 62 47 Z"/>
+            <path fill="currentColor" d="M72 15 H92 C98 15 103 19 104 26 V29 H72 Z"/>
+            <path fill="currentColor" d="M34 20 H68 C70 20 71 22 71 24 V29 H52 C44 29 38 26 34 20 Z"/>
+            <circle fill="currentColor" cx="36" cy="49" r="3"/>
+            <circle fill="currentColor" cx="124" cy="49" r="3"/>
+        </svg>
+    </c:when>
+    <c:when test="${artType == 'SUV'}">
+        <svg class="vehicle-art" viewBox="0 0 160 66" aria-hidden="true">
+            <path fill="currentColor" d="M6 50 V38 C6 33 10 30 17 29 L24 28 L36 11 C37.5 8.5 40 7 43 7 H110 C114 7 117 8.5 119 11 L133 28 C148 30 154 33 154 40 V50 C154 53 152 55 149 55 H11 C8 55 6 53 6 50 Z"/>
+            <path class="art-gap" d="M34 28 L44 13 H70 V28 Z"/>
+            <path class="art-gap" d="M76 13 H100 V28 H76 Z"/>
+            <path class="art-gap" d="M106 13 H110 C112 13 113 14 114.5 15.5 L125 28 H106 Z"/>
+            <circle class="art-gap" cx="40" cy="52" r="14"/>
+            <circle class="art-gap" cx="122" cy="52" r="14"/>
+            <circle fill="currentColor" cx="40" cy="52" r="11"/>
+            <circle fill="currentColor" cx="122" cy="52" r="11"/>
+            <circle class="art-gap" cx="40" cy="52" r="4"/>
+            <circle class="art-gap" cx="122" cy="52" r="4"/>
+        </svg>
+    </c:when>
+    <c:otherwise>
+        <svg class="vehicle-art" viewBox="0 0 160 66" aria-hidden="true">
+            <path fill="currentColor" d="M5 49 V42 C5 36 10 33 19 32 L30 31 L48 18 C51 16 55 15 59 15 H96 C101 15 105 16 109 19 L125 31 C144 32 155 36 155 44 V49 C155 52 153 54 150 54 H10 C7 54 5 52 5 49 Z"/>
+            <path class="art-gap" d="M41 31 L52 23 C54 21.5 56 21 59 21 H76 V31 Z"/>
+            <path class="art-gap" d="M82 21 H96 C99 21 102 22 104 24 L113 31 H82 Z"/>
+            <circle class="art-gap" cx="40" cy="52" r="13"/>
+            <circle class="art-gap" cx="122" cy="52" r="13"/>
+            <circle fill="currentColor" cx="40" cy="52" r="10"/>
+            <circle fill="currentColor" cx="122" cy="52" r="10"/>
+            <circle class="art-gap" cx="40" cy="52" r="3.5"/>
+            <circle class="art-gap" cx="122" cy="52" r="3.5"/>
+        </svg>
+    </c:otherwise>
+</c:choose>

@@ -1,0 +1,2 @@
+<%-- Set the page variable "statusValue" to a BookingStatus or VehicleStatus before including this. --%>
+<span class="status-badge status-${fn:toLowerCase(statusValue)}"><c:out value="${fn:toLowerCase(statusValue)}"/></span>

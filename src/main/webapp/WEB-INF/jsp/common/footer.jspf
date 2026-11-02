@@ -1,0 +1,16 @@
+</main>
+<c:choose>
+    <c:when test="${sessionScope.currentUser.admin}">
+        <footer class="admin-footer">Course project for CSE3143 Advanced Java. Payments are simulated.</footer>
+    </div>
+</div>
+    </c:when>
+    <c:otherwise>
+<footer class="app-footer">
+    <div class="container">RoadReady Rentals. Course project for CSE3143 Advanced Java. Payments are simulated.</div>
+</footer>
+    </c:otherwise>
+</c:choose>
+<script src="<c:url value='/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js'/>"></script>
+</body>
+</html>

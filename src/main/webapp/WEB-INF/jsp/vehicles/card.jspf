@@ -1,0 +1,26 @@
+<%-- One vehicle in a results row. Set the loop variable "v" before including this. Times in "criteria" are carried into the link. --%>
+<div class="col-sm-6 col-lg-4">
+    <article class="vehicle-card">
+        <div class="vehicle-yard">
+            <c:set var="artType" value="${v.type}"/><%@ include file="/WEB-INF/jsp/common/vehicle-art.jspf" %>
+        </div>
+        <div class="vehicle-body">
+            <h2><c:out value="${v.displayName}"/></h2>
+            <p class="muted mb-0">${v.type.label}, ${v.modelYear}. <c:out value="${v.fuelType}"/>, <c:out value="${fn:toLowerCase(v.transmission)}"/>, ${v.seats} seats.</p>
+            <c:url var="vehicleUrl" value="/vehicles/${v.id}">
+                <c:if test="${not empty criteria.startAt and not empty criteria.endAt}">
+                    <c:param name="startAt" value="${criteria.startAt}"/>
+                    <c:param name="endAt" value="${criteria.endAt}"/>
+                </c:if>
+            </c:url>
+            <div class="vehicle-foot">
+                <div class="vehicle-price">
+                    <span class="money">&#8377;<fmt:formatNumber value="${v.dailyRate}" pattern="#,##0.##"/></span>
+                    <small>a day</small>
+                    <div class="vehicle-hourly"><span class="money">&#8377;<fmt:formatNumber value="${v.hourlyRate}" pattern="#,##0.##"/></span> an hour</div>
+                </div>
+                <a class="btn btn-primary" href="<c:out value='${vehicleUrl}'/>">View and book<span class="visually-hidden"> <c:out value="${v.displayName}"/></span></a>
+            </div>
+        </div>
+    </article>
+</div>
